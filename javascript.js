@@ -39,8 +39,8 @@ function displayDataOnPage(data) {
     const temp = data.tempF;
     const humidity = data.humidity;
     document.querySelector(".current-weather").innerHTML = currentWeather;
-    document.querySelector(".temp").innerHTML = `${temp}&deg;`;
-    document.querySelector(".humidity").innerHTML = `${humidity}%`;
+    document.querySelector(".temp").innerHTML = `Temperature: ${temp}&deg;`;
+    document.querySelector(".humidity").innerHTML = `Humidity: ${humidity}%`;
 }
 
 //display a gif from Giphy API
@@ -67,13 +67,13 @@ toggleButtons.forEach(toggleButton => {
         if (e.target.className === "cel") {
             e.target.disabled = true;
             obtainedData.then(data => {
-                document.querySelector(".temp").innerHTML = `${data.tempC}&deg;`;
+                document.querySelector(".temp").innerHTML = `Temperature: ${data.tempC}&deg;`;
             })
         }
         if (e.target.className === "far") {
             e.target.disabled = true;
             obtainedData.then(data => {
-                document.querySelector(".temp").innerHTML = `${data.tempF}&deg;`;
+                document.querySelector(".temp").innerHTML = `Temperature: ${data.tempF}&deg;`;
             })
         }
     })
