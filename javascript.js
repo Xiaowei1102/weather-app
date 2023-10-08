@@ -29,6 +29,7 @@ form.addEventListener("submit", (e) => {
     const location = document.querySelector("#search-box");
     obtainedData = getWeatherData(location.value);
     obtainedData.then(data => displayDataOnPage(data));
+    obtainedData.then(data => presentGif(data.current));
 });
 
 //display the info on the page
@@ -42,6 +43,18 @@ function displayDataOnPage(data) {
     document.querySelector(".humidity").innerHTML = `${humidity}%`;
 }
 
+//display a gif from Giphy API
+async function presentGif(weather) {
+    try {
+        const url = `https://api.giphy.com/v1/gifs/translate?api_key=bb2006d9d3454578be1a99cfad65913d&s=${weather}`;
+        const gif = await fetch(url, {mode: 'cors'});
+        const json = await gif.json();
+        const img = document.querySelector("img");
+        img.src = json.data.images.original.url;
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 //to toggle the switch, data from the fetch operation needs to be accessed
 //but async function only return promise and i do not want to re-fetch the data if i only want to toggle the temp
